@@ -1,38 +1,44 @@
-﻿using ErrorHandlingDemo.Model;
-using System.ComponentModel.DataAnnotations;
+﻿using ErrorHandlingDemo.Exceptions;
+using ErrorHandlingDemo.Model;
 using LanguageExt.Common;
+using System.ComponentModel.DataAnnotations;
 
 namespace ErrorHandlingDemo.Services
 {
     public class PostService(ILogger<PostService> logger)
     {
         private readonly ILogger<PostService> _logger = logger;
-        public Post Create(Post post)
+        public Result<Post> Create(Post post)
         {
+            if (post == null)
+            {
+                throw new CustomException("Post Not found", 404);
+            }
             post.Id = Guid.NewGuid().ToString();
             _logger.LogInformation(post.Content);
 
-            ValidatePostAndThrow(post);
+            return Validate(post);
 
-            return post;
+            //return post;
         }
 
-        public Post Update(Post post) 
+        public Result<Post> Update(Post post)
         {
-            throw new NotImplementedException();
+            return new Result<Post>(new NotImplementedException())
         }
 
         private void ValidatePostAndThrow(Post post)
         {
-            var isVaild = false;
+            var isValid = false;
 
-            if (!isVaild)
+            if (!isValid)
             {
                 throw new ValidationException("Invalid post");
             }
         }
 
-        private Result<Post> Validate(Post post) {
+        private Result<Post> Validate(Post post)
+        {
             var isValid = false;
             if (!isValid)
             {
