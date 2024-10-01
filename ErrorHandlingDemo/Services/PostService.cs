@@ -8,7 +8,7 @@ namespace ErrorHandlingDemo.Services
     public class PostService(ILogger<PostService> logger)
     {
         private readonly ILogger<PostService> _logger = logger;
-        public Result<Post> Create(Post post)
+        public Post Create(Post post)
         {
             if (post == null)
             {
@@ -22,9 +22,9 @@ namespace ErrorHandlingDemo.Services
             //return post;
         }
 
-        public Result<Post> Update(Post post)
+        public Post Update(Post post)
         {
-            return new Result<Post>(new NotImplementedException())
+            throw new NotImplementedException();
         }
 
         private void ValidatePostAndThrow(Post post)

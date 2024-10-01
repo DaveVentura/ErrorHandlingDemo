@@ -16,7 +16,7 @@ namespace ErrorHandlingDemo.Controllers
         {
             var postResult = _postService.Create(new Post { Title = postRequest.Title, Content = postRequest.Content });
 
-            return postResult.ToResultResponse(p => { return p; });
+            return Ok(postResult);
         }
 
         [HttpPut]

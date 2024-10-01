@@ -25,7 +25,7 @@ builder.Services.AddFastEndpoints().AddSwaggerGen();
 
 var app = builder.Build();
 
-//app.UseErrorHandlingMiddleware();
+app.UseErrorHandlingMiddleware();
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
