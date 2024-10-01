@@ -1,6 +1,6 @@
 ﻿namespace ErrorHandlingDemo.Contracts
 {
-    public class PostRequest
+    public class PostCreateRequest
     {
         public string Title { get; set; }
         public string Content { get; set; }

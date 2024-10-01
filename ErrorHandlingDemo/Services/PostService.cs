@@ -24,21 +24,21 @@ namespace ErrorHandlingDemo.Services
 
         private void ValidatePostAndThrow(Post post)
         {
-            var isVaild = false;
+            var isValid = false;
 
-            if (!isVaild)
+            if (!isValid)
             {
                 throw new ValidationException("Invalid post");
             }
         }
 
-        private Result<Post> Validate(Post post) {
+        private Post Validate(Post post) {
             var isValid = false;
             if (!isValid)
             {
-                return new Result<Post>(new ValidationException("Invalid post"));
+                throw new ValidationException("Invalid post");
             }
-            return new Result<Post>(post);
+            return post;
         }
     }
 

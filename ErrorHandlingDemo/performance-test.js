@@ -8,7 +8,7 @@ export let options = {
 };
 
 export default () => {
-    const url = 'https://localhost:44375/posts'
+    const url = 'https://localhost:44375/fast-posts'
     const payload = JSON.stringify({
         title: "Test Post",
         content: "This is a post"

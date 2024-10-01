@@ -1,6 +1,10 @@
 using DataOne.WorkspaceHub.API.Exceptions;
+using ErrorHandlingDemo.Model;
 using ErrorHandlingDemo.Services;
 using Microsoft.AspNetCore.Mvc;
+using FastEndpoints;
+using FastEndpoints.Swagger;
+using ErrorHandlingDemo.Contracts;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -16,6 +20,7 @@ builder.Services.Configure<ApiBehaviorOptions>(options => {
 });
 
 builder.Services.AddSingleton<PostService, PostService>();
+builder.Services.AddFastEndpoints().AddSwaggerGen();
 
 var app = builder.Build();
 
@@ -28,9 +33,17 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
-
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();
+
+app.UseFastEndpoints().UseSwaggerGen();
+
+app.MapPost("/minimal-posts", (PostService postService, PostCreateRequest postRequest) =>
+{
+    return postService.Create(new Post { Content = postRequest.Content, Title = postRequest.Title });
+}
+);
 
 app.Run();
