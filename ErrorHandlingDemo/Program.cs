@@ -15,7 +15,8 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-builder.Services.Configure<ApiBehaviorOptions>(options => {
+builder.Services.Configure<ApiBehaviorOptions>(options =>
+{
     options.SuppressModelStateInvalidFilter = true;
 });
 
@@ -24,7 +25,7 @@ builder.Services.AddFastEndpoints().AddSwaggerGen();
 
 var app = builder.Build();
 
-app.UseErrorHandlingMiddleware();
+//app.UseErrorHandlingMiddleware();
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {

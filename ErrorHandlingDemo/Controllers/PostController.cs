@@ -1,9 +1,8 @@
 ﻿using ErrorHandlingDemo.Contracts;
+using ErrorHandlingDemo.Extensions;
 using ErrorHandlingDemo.Model;
 using ErrorHandlingDemo.Services;
-using ErrorHandlingDemo.Extensions;
 using Microsoft.AspNetCore.Mvc;
-using System.Reflection.Metadata.Ecma335;
 
 namespace ErrorHandlingDemo.Controllers
 {
@@ -16,7 +15,8 @@ namespace ErrorHandlingDemo.Controllers
         public IActionResult CreatePost(PostCreateRequest postRequest)
         {
             var postResult = _postService.Create(new Post { Title = postRequest.Title, Content = postRequest.Content });
-            return Ok(postResult);
+
+            return postResult.ToResultResponse(p => { return p; });
         }
 
         [HttpPut]
